@@ -45,3 +45,9 @@ ul.pagination {
     background: #435d7d;
     padding: 16px 20px;
 }
+.form-control.invalid-feedback{
+    border: 1px solid #dc3545;
+}
+.invalid-feedback{
+    display: block;
+}
