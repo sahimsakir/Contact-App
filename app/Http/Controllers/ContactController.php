@@ -19,7 +19,11 @@ class ContactController extends Controller
         return view('contacts.index',['contacts'=>$contacts, 'companies'=>$companies]);
     }
     public function create(){
-        return view('contacts.create');
+        $companies = Company::orderBy('name', 'ASC')->pluck('name','id')->prepend('All Companies','');
+        return view('contacts.create',['companies'=>$companies]);
+    }
+    public function store(Request $request){
+        dd($request->all());
     }
     public function show($id){
         $contact = Contact::find($id);
