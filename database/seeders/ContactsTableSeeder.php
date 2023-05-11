@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Company;
-
-class CompaniesTableSeeder extends Seeder
+use App\Models\Contact;
+class ContactsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +13,6 @@ class CompaniesTableSeeder extends Seeder
     public function run(): void
     {
         //
-        Company::factory()->count(10)->create();
-
+        Contact::factory()->count(20)->create();
     }
 }
