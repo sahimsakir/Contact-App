@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Company;
+use App\Models\User;
 use Faker\Generator as Faker;
 
 /**
@@ -25,7 +26,6 @@ class ContactFactory extends Factory
             'address' => $this->faker->address,
             'phone' => $this->faker->phoneNumber,
             'email' => $this->faker->email,
-            'company_id' => Company::pluck('id')->random(),
         ];
     }
 }
