@@ -29,4 +29,22 @@ class ContactRequest extends FormRequest
             'company_id' => 'required|exists:companies,id',
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'company_id'=> 'company',
+            'email'=> 'email address',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            '*.required' => "Please enter your :attribute!",
+            'email.email' => "The email that you entered is not valid!",
+            'email.unique' => "The email that you entered is already in use!",
+
+        ];
+    }
 }
