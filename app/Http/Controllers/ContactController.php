@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Models\Company;
 use App\Models\Contact;
 use Illuminate\Http\Request;
@@ -26,15 +27,7 @@ class ContactController extends Controller
         return view('contacts.create',['contact'=>$contact, 'companies'=>$companies]);
     }
 
-    public function store(Request $request){
-
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:contacts',
-            'address' => 'required',
-            'company_id' => 'required|exists:companies,id',
-        ]);
+    public function store(ContactRequest $request){
 
         $request->user()->contacts()->create($request->all());
 
@@ -49,20 +42,13 @@ class ContactController extends Controller
 
     public function edit(Contact $contact){
 
-        $companies = $this->userCompanies();
+        $companies = Company::userCompanies();
 
         return view('contacts.edit',['contact'=>$contact,'companies'=>$companies]);
     }
 
-    public function update(Contact $contact, Request $request){
+    public function update(Contact $contact, ContactRequest $request){
 
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'address' => 'required',
-            'company_id' => 'required|exists:companies,id',
-        ]);
 
         $contact->update($request->all());
 
@@ -75,6 +61,8 @@ class ContactController extends Controller
         return back()->with('message','Contact has been deleted Successfully');
 
     }
+
+
 
 
 }
