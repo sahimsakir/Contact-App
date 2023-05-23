@@ -18,7 +18,7 @@ class CompanyController extends Controller
     public function index()
     {
 
-        $companies = auth()->user()->companies()->latestFirst()->paginate(5);
+        $companies = auth()->user()->companies()->with('contacts')->latestFirst()->paginate(5);
 
         return view('companies.index',['companies'=>$companies]);
     }
