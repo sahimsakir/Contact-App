@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\CompanySearchScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,5 +29,12 @@ class Company extends Model
 
         return self::where('user_id',auth()->id())->orderBy('name', 'ASC')->pluck('name','id')->prepend('All Companies','');
 
+    }
+
+    public function scopeLatestFirst ($query){
+        return $query->orderBy('id', 'DESC');
+    }
+    public static function booted(){
+        static::addGlobalScope(new CompanySearchScope);
     }
 }
