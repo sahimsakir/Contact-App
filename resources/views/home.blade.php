@@ -1,5 +1,5 @@
 @extends('layouts.main')
-
+@section('title','Home | Contact APP')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ Auth::user()->name }} {{ __('is logged in!') }}
+                    {{ Auth::user()->first_name }} {{ __('is logged in!') }}
                 </div>
             </div>
         </div>
