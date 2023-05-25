@@ -17,9 +17,11 @@ class ProfileController extends Controller
     }
     public function update(ProfileUpdateRequest $request)
     {
-        $request->user()->update($request->validated());
+        $profileData = $request->handleRequest();
 
-        return redirect()->route('settings.profile.edit')->with('message','Profile has been updated Successfully');
+        $request->user()->update($profileData);
+
+        return back()->with('message','Profile has been updated Successfully');
     }
 
 }

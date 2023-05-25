@@ -26,6 +26,7 @@ class ProfileUpdateRequest extends FormRequest
             'last_name' => 'required',
             'company' => 'nullable',
             'bio' => 'nullable',
+            'profile_picture' => 'nullable|mimes:jpeg,bmp,png',
         ];
     }
 
@@ -33,7 +34,20 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             '*.required' => "Please enter your :attribute!",
+            'profile_picture.mimes' => "Selected image should in jpeg or bmp or png!",
 
         ];
+    }
+    public function handleRequest()
+    {
+        $profileData = $this->validated();
+        $profile = $this->user();
+
+        if($this->hasFile('profile_picture')){
+            $picture = $this->profile_picture;
+            $picture->move(public_path('assets/images/profile-pictures'), $fileName = "profile-picture-{$profile->id}.".$picture->getClientOriginalExtension());
+            $profileData['profile_picture'] = $fileName;
+        }
+        return $profileData;
     }
 }
