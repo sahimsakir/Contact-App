@@ -54,7 +54,7 @@
 
             <nav class="mt-4">
                 <ul class="pagination justify-content-center">
-                    {{$companies->links()}}
+                    {{$companies->withQueryString()->links()}}
                 </ul>
                 </nav>
             </div>

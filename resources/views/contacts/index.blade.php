@@ -52,7 +52,7 @@
 
             <nav class="mt-4">
                 <ul class="pagination justify-content-center">
-                    {{$contacts->appends(request()->only('company_id'))->links()}}
+                    {{$contacts->withQueryString()->links()}}
                 </ul>
                 </nav>
             </div>
